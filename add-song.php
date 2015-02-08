@@ -3,6 +3,10 @@
   require_once __DIR__ . '/GenreQuery.php';
   require_once __DIR__ . '/ArtistQuery.php';
   
+  use \Itp\Music\GenreQuery;
+  use \Itp\Music\ArtistQuery;
+  use \Itp\Music\Song;
+
   $artistQuery = new ArtistQuery();
   $artists = $artistQuery->getAll();
 

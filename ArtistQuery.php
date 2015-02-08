@@ -1,6 +1,10 @@
 <?php
 
+namespace Itp\Music;
+
 require_once __DIR__ . '/Database.php';
+
+use \Itp\Base\Database;
 
 class ArtistQuery extends Database
 { 
