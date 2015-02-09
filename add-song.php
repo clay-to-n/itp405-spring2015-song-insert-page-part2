@@ -1,4 +1,5 @@
 <?php
+  require_once __DIR__ . '/vendor/autoload.php';
   require_once __DIR__ . '/Song.php';
   require_once __DIR__ . '/GenreQuery.php';
   require_once __DIR__ . '/ArtistQuery.php';
@@ -6,6 +7,7 @@
   use \Itp\Music\GenreQuery;
   use \Itp\Music\ArtistQuery;
   use \Itp\Music\Song;
+  use \Symfony\Component\HttpFoundation\Session\Session;
 
   $artistQuery = new ArtistQuery();
   $artists = $artistQuery->getAll();
@@ -13,6 +15,9 @@
   $genreQuery = new GenreQuery();
   $genres = $genreQuery->getAll();
 
+  $session = new Session();
+  $session->start();
+  
   if (isset($_POST['submit'])) {
     $song = new Song();
     $song->setTitle($_POST['title']);
@@ -20,6 +25,7 @@
     $song->setGenreId($_POST['genreId']);
     $song->setPrice($_POST['price']);
     
+    $message = "Whee?";
     if (empty($_POST['title'])) {
       $message = "Please enter a title!"; 
     } else if (empty($_POST['artistId'])) {
@@ -27,7 +33,10 @@
     } else {
       $song->save();
       $message = "The song " . $song->getTitle() . " with an ID of " . $song->getId() . " was inserted successfully!";
-    }       
+    }   
+    $session->getFlashBag()->add('add-song-success', $message);
+    header('Location: add-song.php');
+    exit;
   }
 ?>
 
@@ -52,9 +61,10 @@
         <div class="col-md-4 col-md-offset-4">
           
           <p>
-            <?php if(isset($_POST['submit'])){
-              echo $message;
-            }
+            <?php
+              foreach ($session->getFlashBag()->get('add-song-success', array()) as $message) :
+                echo ($message);
+              endforeach
             ?>
           </p>
           
