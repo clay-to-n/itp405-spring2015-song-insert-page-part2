@@ -1,5 +1,4 @@
 <?php
-
 namespace Itp\Base;
 
 use \PDO;

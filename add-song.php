@@ -1,8 +1,5 @@
 <?php
   require_once __DIR__ . '/vendor/autoload.php';
-  require_once __DIR__ . '/Song.php';
-  require_once __DIR__ . '/GenreQuery.php';
-  require_once __DIR__ . '/ArtistQuery.php';
   
   use \Itp\Music\GenreQuery;
   use \Itp\Music\ArtistQuery;

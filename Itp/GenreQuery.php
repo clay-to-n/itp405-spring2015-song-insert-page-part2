@@ -1,8 +1,7 @@
 <?php
-
 namespace Itp\Music;
 
-require_once __DIR__ . '/Database.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use \Itp\Base\Database;
 
